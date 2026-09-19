@@ -18,7 +18,18 @@ size_t calc(double r, size_t tests, size_t seed) {
   return inside;
 }
 
+struct calcStruct {
+  double r;
+  size_t tests;
+  size_t seed;
+};
 
+void* calcThread(void* data) {
+  auto pod = static_cast< calcStruct* >(data);
+  size_t res = calc(pod->r, pod->tests, pod->seed);
+
+  return reinterpret_cast< void* >(res);
+}
 
 bool isInside(double x, double y, double r) {
   if (x * x + y * y <= r * r) {
