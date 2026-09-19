@@ -11,7 +11,11 @@ size_t calc(double r, size_t tests, size_t seed) {
 
 
 bool isInside(double x, double y, double r) {
+  if (x * x + y * y <= r * r) {
+    return true;
+  }
 
+  return false;
 }
 
 int main() {
